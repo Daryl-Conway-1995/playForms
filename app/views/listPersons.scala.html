@@ -1,0 +1,27 @@
+@(Persons: Seq[Person], form: Form[Person])(implicit messages: Messages)
+
+@main("People") {
+    <h1>these are the People</h1>
+    <table>
+        <thead>
+            <tr><th>First name</th><th>Last name</th><th>Age</th></tr>
+        </thead>
+        <tbody>
+        @for(person <- Persons) {
+            <tr><td>@person.firstName</td><td>@person.LastName</td><td>@person.age</td></tr>
+        }
+        </tbody>
+    </table>
+
+    <hr/>
+
+    @helper.form(routes.Application.createPerson()) {
+        @helper.inputText(form("firstName"), '_label -> "first name", '_showConstraints -> false)
+        @helper.inputText(form("lastName"), '_label -> "last name" , '_showConstraints -> false)
+        @helper.inputText(form("age"), '_label -> "age" , '_showConstraints -> false)
+        <button type="submit">Create Persons</button>
+    }
+
+    <br>
+    <a href='@routes.Application.listCDs()'>go to CD's</a>
+}
